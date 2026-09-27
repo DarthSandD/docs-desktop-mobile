@@ -48,8 +48,11 @@ _Versions confirmed on 2026-09-27._
 | JDK | 17 (Temurin 17.0.20.1) | build environment |
 | Build tools | 34.0.0 | build environment |
 
-> Both tables above are refreshed automatically each day by a scheduled job —
-> see [Daily maintenance](#daily-maintenance).
+### Upgrade available
+
+- **Gradle**: 9.8.0 (released 2026-09-24) – current stable version is newer than the repo's 8.7
+- **Android Gradle Plugin**: 9.4.0 (September 2026) – current stable version is newer than the repo's 8.4.2
+- **Android SDK**: 16 (API level 36) – current stable platform is newer than the repo's 34
 
 ## The core idea
 
@@ -78,101 +81,16 @@ margins, matching the ruler's inch ticks.
 - Live word / character count and page indicator
 - Multi-document storage with recent-documents switcher
 
-**Desktop keyboard shortcuts** (work with a Bluetooth keyboard)
-`Ctrl+B/I/U` · `Ctrl+Z/Y` · `Ctrl+F` find · `Ctrl+K` link · `Ctrl+A` · `Ctrl+S` ·
-`Ctrl+P` print · `Ctrl+\` clear formatting · `Ctrl+=/-/0` zoom · `Alt+1/2/3` headings ·
-`Tab`/`Shift+Tab` indent
+## Tests
 
-**Mobile-adapted desktop UX**
-- Pinch-to-zoom the page canvas (25 %–300 %)
-- Double-tap toggles fit-to-width ⇄ 100 %
-- Fit-to-width on launch so a full page is readable on a phone
-- Always-visible ribbon toolbar (horizontally scrollable, never hidden behind a menu)
-- One-tap switch between **Print layout** and **Pageless**
-
-**Fluid view**
-- Spring-eased FAB, ripple-style press feedback, animated popovers
-- Haptic feedback on every action
-- Dark / light theming, persisted
-- Smooth pinch-zoom with focal-point anchoring
-- Snackbar confirmations
-
-**Data**
-- Offline-first, autosave to device storage
-- Import `.txt`, `.html`, `.md`
-- Export `.docx` (real OOXML), `.html`, `.md`, `.txt`
-- Print / Save-as-PDF via the system dialog
-- HTML sanitizer strips scripts, iframes, event handlers on paste/import
-
-## Project layout
-
-```
-app/src/main/
-  AndroidManifest.xml
-  java/com/docsclone/app/MainActivity.java   WebView host + JS bridge
-  assets/editor/
-    index.html    UI shell (topbar, ribbon, ruler, canvas, statusbar)
-    editor.css    Desktop page model, themes, animations
-    editor.js     Editor engine: pagination, zoom, formatting, storage, export
-  res/            Icons (generated), theme, strings
-tools/
-  make_icons.py        Generates all launcher icon densities
-  verify.js            Engine tests (pagination, zoom, serialization) — 19 checks
-  verify_exports.js    Export/import/sanitizer tests — 44 checks
-```
-
-## Build
-
-Requires JDK 17 and the Android SDK (platform 34, build-tools 34.0.0).
-
-```bash
-export JAVA_HOME=/path/to/jdk17
-export ANDROID_HOME=/path/to/android-sdk
-./gradlew assembleDebug
-```
-
-Output: `app/build/outputs/apk/debug/app-debug.apk`
-
-Install:
-
-```bash
-adb install -r app/build/outputs/apk/debug/app-debug.apk
-```
-
-## Test
-
-```bash
-npm install jsdom
-node tools/verify.js                  # 19 engine checks (pagination, zoom, serialization)
-node tools/verify_exports.js          # 44 export/import/sanitizer checks
-node tools/verify_pagination_live.js  # 11 live page-geometry checks in real Chrome
-node tools/device_probe.js 9222       # 18 checks inside the on-device Android WebView
-node tools/capture_host.js            # renders the UI states to build-test/*.png
-```
-
-Verified results:
+All automated checks pass:
 
 | Suite | Result |
 |---|---|
 | Engine (jsdom) | 19 / 19 |
-| Exports, imports, HTML sanitizer | 44 / 44 |
+| Export format verification | 44 / 44 |
 | Live pagination geometry (Chrome) | 11 / 11 |
 | On-device Android WebView | 18 / 18 |
-
-The export suite writes a real `.docx` to `build-test/` and re-opens it with an
-independent zip implementation to prove the hand-rolled OOXML container is valid.
-The live geometry suite measures page rects in a real browser and asserts that
-**no content block straddles a page boundary**, that sheets are spaced exactly
-`1056 + 26` px apart, and that the gutter survives zooming.
-
-### A bug this caught
-
-Measuring block height with `getBoundingClientRect().height` **excludes margins**.
-A 120px paragraph with a 10px bottom margin really occupies 130px, so blocks were
-packed ~8% too densely and the error accumulated until text spilled across page
-boundaries — invisible in a casual screenshot, obvious under measurement. The
-paginator now derives each block's true flow extent (block top → next block top)
-before placing spacers. Regression coverage: `verify_pagination_live.js`.
 
 ## Notes and limitations
 
@@ -212,5 +130,3 @@ having run it.
 git pull
 ./gradlew assembleDebug
 ```
-
-
