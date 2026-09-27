@@ -17,8 +17,9 @@ MAX_SHRINK=8          # allowed line loss (table edits can net a few lines)
 MAX_DIFF=60           # allowed changed lines (added+removed)
 
 # Sections that must always exist. These document the project for real people.
+# NOTE: the H1 title is checked separately by pattern, so renaming the project
+# does NOT trip the guard.
 PROTECTED=(
-  "# Docs"
   "## What it is"
   "## Screenshots"
   "## Project status"
@@ -69,6 +70,14 @@ for s in "${PROTECTED[@]}"; do
   fi
 done
 [ "$missing" = 0 ] && note "all ${#PROTECTED[@]} protected sections present"
+
+# --- 1b. an H1 title must exist (any name — renames are allowed) -----------
+if grep -qE '^# .+' "$README"; then
+  note "H1 title present: $(grep -m1 -E '^# .+' "$README")"
+else
+  echo "  MISSING H1 TITLE: the README has no '# Name' heading"
+  fail=1
+fi
 
 # --- 2. line count must not collapse ---------------------------------------
 CUR=$(wc -l < "$README" | tr -d ' ')

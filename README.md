@@ -30,6 +30,8 @@ _Last verified: 2026-09-27_
 
 | Item | Value |
 |---|---|
+| Project name | Docs |
+| Repository | https://github.com/DarthSandD/docs-desktop-mobile |
 | APK | [`apk/Docs-debug.apk`](apk/Docs-debug.apk) — 180,942 bytes |
 | APK MD5 | `b1797c71e3fe4b249c68a3e38985adb6` |
 | Signature | APK Signature Scheme v2 (debug key) |
