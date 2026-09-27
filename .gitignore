@@ -1,0 +1,32 @@
+# ---- Android / Gradle build output -----------------------------------------
+app/build/
+build/
+.gradle/
+*.apk.idsig
+output-metadata.json
+
+# ---- Machine-specific (contains this PC's SDK path) -------------------------
+local.properties
+
+# ---- Dependencies ------------------------------------------------------------
+node_modules/
+package-lock.json
+
+# ---- Test / capture scratch --------------------------------------------------
+build-test/
+chrome-profile/
+chrome-prof2/
+chrome-prof3/
+*.log
+
+# ---- IDE / OS ----------------------------------------------------------------
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---- Keystores (never commit) ------------------------------------------------
+*.jks
+*.keystore
+keystore.properties
+deliverable/

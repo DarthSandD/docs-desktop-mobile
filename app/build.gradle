@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.docsclone.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.docsclone.app"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    androidResources {
+        noCompress 'html', 'js', 'css'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/*']
+        }
+    }
+
+    lint {
+        abortOnError false
+    }
+}
+
+// Pure framework app: no AndroidX/AppCompat, so no transitive Kotlin stdlib
+// conflicts. Everything the UI needs is delivered by the WebView editor engine.
+dependencies {
+}
