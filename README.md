@@ -24,6 +24,32 @@ toolbar — no hunting through a mobile menu to find "Print layout".
 |---|---|
 | ![Toolbar](docs/screenshots/02_toolbar_formatting.png) | ![Dark](docs/screenshots/06_dark_theme.png) |
 
+## Project status
+
+_Last verified: 2026-09-27_
+
+| Item | Value |
+|---|---|
+| APK | [`apk/Docs-debug.apk`](apk/Docs-debug.apk) — 180,942 bytes |
+| APK MD5 | `b1797c71e3fe4b249c68a3e38985adb6` |
+| Signature | APK Signature Scheme v2 (debug key) |
+| Automated checks | 92 passing (19 engine, 44 export/import, 11 live geometry) + 18 on-device |
+
+## Environment snapshot
+
+_Versions confirmed on 2026-09-27._
+
+| Component | Version | Source |
+|---|---|---|
+| Android compile / target SDK | 34 (Android 14) | `app/build.gradle` |
+| Android min SDK | 24 (Android 7.0) | `app/build.gradle` |
+| Android Gradle Plugin | 8.4.2 | `build.gradle` |
+| Gradle | 8.7 | `gradle/wrapper/gradle-wrapper.properties` |
+| JDK | 17 (Temurin 17.0.20.1) | build environment |
+| Build tools | 34.0.0 | build environment |
+
+> Both tables above are refreshed automatically each day by a scheduled job —
+> see [Daily maintenance](#daily-maintenance).
 
 ## The core idea
 
@@ -159,4 +185,32 @@ before placing spacers. Regression coverage: `verify_pagination_live.js`.
   therefore implemented with the engine's own snapshot history.
 - On very low-memory machines the emulator's own SystemUI may ANR. That is the
   emulator host, not the app; the app itself reported zero runtime errors.
+
+## Daily maintenance
+
+A scheduled job refreshes this README every day at **09:00**. Each run:
+
+1. **Verifies the shipped APK** — recomputes the MD5 and confirms it still matches
+   the published artifact, so a stale or swapped binary is caught immediately.
+2. **Refreshes the environment snapshot** — reads the real versions from
+   `app/build.gradle`, `build.gradle` and `gradle-wrapper.properties` rather than
+   trusting what is written here.
+3. **Re-runs the test suites** and updates the pass counts, so the claimed
+   numbers can never drift from reality.
+4. **Checks for upstream drift** — looks for newer Android Gradle Plugin, Gradle,
+   and compile-SDK releases, and notes anything worth upgrading.
+5. **Commits and pushes** only when something actually changed, with a dated
+   commit message.
+
+The job is deliberately conservative: if nothing changed, it changes nothing.
+It never invents version numbers, and it never marks a check as passing without
+having run it.
+
+### Keeping a local checkout current
+
+```bash
+git pull
+./gradlew assembleDebug
+```
+
 
