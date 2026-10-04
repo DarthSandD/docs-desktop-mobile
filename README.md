@@ -8,7 +8,7 @@ toolbar — no hunting through a mobile menu to find "Print layout".
 
 | | |
 |---|---|
-| **APK** | [`apk/Docs-debug.apk`](apk/Docs-debug.apk) (181 KB, debug-signed) |
+| **Build** | Native Android app (`WebView` shell + HTML/CSS/JS editor). Build the debug APK locally — see Build below. |
 | **Package** | `com.docsclone.app` |
 | **Min / target SDK** | 24 (Android 7.0) / 34 (Android 14) |
 | **Architecture** | Native Android shell (`WebView`) + self-contained HTML/CSS/JS editor engine |
@@ -32,9 +32,8 @@ _Last verified: 2026-09-27_
 |---|---|
 | Project name | Docs |
 | Repository | https://github.com/DarthSandD/docs-desktop-mobile |
-| APK | [`apk/Docs-debug.apk`](apk/Docs-debug.apk) — 180,942 bytes |
-| APK MD5 | `b1797c71e3fe4b249c68a3e38985adb6` |
-| Signature | APK Signature Scheme v2 (debug key) |
+| Build output | `app/build/outputs/apk/debug/app-debug.apk` (built locally, not committed) |
+| Signature | Debug key |
 | Automated checks | 92 passing (19 engine, 44 export/import, 11 live geometry) + 18 on-device |
 
 ## Environment snapshot
