@@ -30,3 +30,5 @@ Thumbs.db
 *.keystore
 keystore.properties
 deliverable/
+*.apk
+*.aab
