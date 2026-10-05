@@ -26,7 +26,7 @@ toolbar — no hunting through a mobile menu to find "Print layout".
 
 ## Project status
 
-_Last verified: 2026-09-27_
+_Last verified: 2026-10-05_
 
 | Item | Value |
 |---|---|
@@ -38,7 +38,7 @@ _Last verified: 2026-09-27_
 
 ## Environment snapshot
 
-_Versions confirmed on 2026-09-27._
+_Versions confirmed on 2026-10-05._
 
 | Component | Version | Source |
 |---|---|---|
@@ -51,7 +51,7 @@ _Versions confirmed on 2026-09-27._
 
 ### Upgrade available
 
-Verified against upstream sources on 2026-09-27:
+Verified against upstream sources on 2026-10-05:
 
 - **Android Gradle Plugin** — 9.4.0 is current stable; this repo uses 8.4.2
   ([release notes](https://developer.android.com/build/releases/agp-9-4-0-release-notes)).
