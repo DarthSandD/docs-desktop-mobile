@@ -26,7 +26,7 @@ toolbar — no hunting through a mobile menu to find "Print layout".
 
 ## Project status
 
-_Last verified: 2026-10-07_
+_Last verified: 2026-10-08_
 
 | Item | Value |
 |---|---|
@@ -38,7 +38,7 @@ _Last verified: 2026-10-07_
 
 ## Environment snapshot
 
-_Versions confirmed on 2026-10-07._
+_Versions confirmed on 2026-10-08._
 
 | Component | Version | Source |
 |---|---|---|
@@ -51,14 +51,14 @@ _Versions confirmed on 2026-10-07._
 
 ### Upgrade available
 
-Verified against upstream sources on 2026-10-07:
+Verified against upstream sources on 2026-10-08:
 
 - **Android Gradle Plugin** — 9.4.1 is current stable; this repo uses 8.4.2
   ([release notes](https://developer.android.com/build/releases/agp-9-4-0-release-notes)).
   AGP 9.4 requires Gradle 9.6.0+, JDK 17, and build-tools 36.0.0.
 - **Gradle** — 9.8.0 released 2026-09-24; this repo uses 8.7
   ([release notes](https://docs.gradle.org/9.8.0/release-notes.html)). 9.7.1 is also available.
-- **compileSdk** — Android 16 (API 36) is stable; this repo compiles against 34.
+- **compileSdk** — Android 17 (API 37) is stable; this repo compiles against 34.
 
 None of these are blocking — the project builds and runs fine as-is. Upgrading is a
 deliberate maintenance task, not an automatic change: AGP 9.x needs a Gradle and
